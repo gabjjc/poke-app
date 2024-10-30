@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbaritem from './navbaritem';
 
+
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,11 +24,11 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             
-            <Navbaritem text='MI ITEM' destination='#'/>
+            <Navbaritem text='Home' destination='/'/>
 
-            <Navbaritem text='Features' destination='#'/>
+            <Navbaritem text='Features' destination='/Features'/>
 
-            <Navbaritem text='Pricing' destination='#'/>
+            <Navbaritem text='Match' destination='/Match'/>
             
             
           </ul>

@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Navbaritem = ({text, destination, active = false}) => {
+const Navbaritem = ({ text, destination, active = false }) => {
   return (
     <li className="nav-item">
-      <a className="nav-link " aria-current="page" href="{destination}">
-        {text}
-      </a>
+      <Link className="nav-link" to={destination}>{text}</Link>
     </li>
   );
-}
+};
 
-export default Navbaritem
+export default Navbaritem;
