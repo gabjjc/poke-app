@@ -23,7 +23,7 @@ function App() {
         <header className="App-header">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Features" element={<Features />} />
+            <Route path="/Features/:pokeId" element={<Features />} />
             <Route path="/Match" element={<Match />} />
           </Routes>
         </header>

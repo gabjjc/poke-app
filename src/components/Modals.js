@@ -4,11 +4,12 @@ import Modal from "react-bootstrap/Modal";
 import { useFetchData } from "./customHooks/useFetchData";
 import CurrentPokemonContext from "../components/CustomContext";
 import Accordion from "./Accordion";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Modals = ({ show, handleClose, selected }) => {
   // obtener Los datos
   const endpoint = "https://pokeapi.co/api/v2/pokemon/" + selected + "/";
+  const navigate = useNavigate(); // al inicio del componente, como todo hook
 
   const { data, loading, error } = useFetchData(endpoint);
 
@@ -17,8 +18,7 @@ const Modals = ({ show, handleClose, selected }) => {
   const handleSelect = () => {
     setCurrentPokemon(data);
     handleClose();
-    return redirect("/Features")
-    // return <Navigate to="/Features" />;
+    navigate("/Features/"+ selected) // esto dentro de tu funcion
   };
 
   if (loading) {
@@ -35,7 +35,7 @@ const Modals = ({ show, handleClose, selected }) => {
         <Modal.Title> {data.name} ! </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>
+        <div className="text-center">
           <img 
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`}
           alt={data.name}
