@@ -6,6 +6,7 @@ const AccordionItem = ({title, data , value}) => {
   let uuid = "collapse"+uuidv4();
   let id="#"+uuid;
 
+  console.log(data)
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -36,7 +37,7 @@ const AccordionItem = ({title, data , value}) => {
 
             data.map((attribute) => (
             <div key={attribute.stat.name} className="row mb-3">
-                    <span><strong>{attribute.stat.name}:</strong> {attribute.effort} </span>
+                    <span><strong>{attribute.stat.name}:</strong> {attribute.base_stat} </span>
               
             </div>
                 ))}

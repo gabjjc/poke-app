@@ -1,24 +1,28 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useFetchData } from "./customHooks/useFetchData";
-import CurrentPokemonContext from "../components/CustomContext";
 import Accordion from "./Accordion";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { select } from "../slices/pokemon-slice";
 
 const Modals = ({ show, handleClose, selected }) => {
-  // obtener Los datos
   const endpoint = "https://pokeapi.co/api/v2/pokemon/" + selected + "/";
   const navigate = useNavigate(); // al inicio del componente, como todo hook
 
   const { data, loading, error } = useFetchData(endpoint);
 
-  const { setCurrentPokemon } = useContext(CurrentPokemonContext);
+  const dispatch = useDispatch();
 
   const handleSelect = () => {
-    setCurrentPokemon(data);
+    const selected = {
+      id: data.id,
+      name: data.name,
+    };
+    dispatch(select(selected));
     handleClose();
-    navigate("/Features/"+ selected) // esto dentro de tu funcion
+    navigate("/Features/" + data.id); // esto dentro de tu funcion
   };
 
   if (loading) {
@@ -36,15 +40,15 @@ const Modals = ({ show, handleClose, selected }) => {
       </Modal.Header>
       <Modal.Body>
         <div className="text-center">
-          <img 
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`}
-          alt={data.name}
-          height={150}
-          width={150}
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`}
+            alt={data.name}
+            height={150}
+            width={150}
           />
         </div>
-       <Accordion pokemon={data}/>
-       </Modal.Body>
+        <Accordion pokemon={data} />
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close

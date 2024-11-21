@@ -1,11 +1,15 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import Navbaritem from "./navbaritem";
-import CurrentPokemonContext from "../../CustomContext";
+import { useDispatch, useSelector } from "react-redux";
+import { unSelect } from "../../../slices/pokemon-slice";
 
 const Navbar = () => {
-  const { currentPokemon, setCurrentPokemon } = useContext(
-    CurrentPokemonContext
-  );
+  const currentPokemon = useSelector((state) => state.pokemon);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(unSelect());
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,13 +36,13 @@ const Navbar = () => {
 
             <Navbaritem text="Match" destination="/Match" />
           </ul>
-          {currentPokemon && (
+          {currentPokemon.id && (
             <>
               <span className="navbar-text ms-auto">
                 Hola {currentPokemon.name}!
               </span>
 
-              <a className="navbar-text" href="/#" onClick={ () => { setCurrentPokemon(null)}}>
+              <a className="navbar-text" href="/#" onClick={handleLogout}>
                 Cerra Sesión
               </a>
             </>
